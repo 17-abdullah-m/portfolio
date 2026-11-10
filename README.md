@@ -39,14 +39,14 @@ No application secrets or environment variables are required. Vercel account aut
 - Skill category filters, expandable focus cards, and project concept dialogs
 - Floating navigation with active section tracking and mobile navigation
 - Accessible form labels, keyboard navigation, and reduced-motion support
-- A downloadable text bio using the user's supplied details
+- A downloadable one-page PDF resume using the user's supplied details
 - A contact form that opens a prefilled email draft in the visitor's email app
 
 The contact form does not send email or store submissions. Visitors review and send the draft themselves. No API keys or backend credentials are needed.
 
 ## Personal details
 
-Edit `profile.js` for the contact links, downloadable bio details, and portrait source. The visible page biography, skill cards, and education text are in `index.html`. The currently configured links and email were supplied by the user. LinkedIn was not independently fetched or verified.
+Edit `profile.js` for the contact links, professional headline, and portrait source. The visible page profile, skill cards, and education text are in `index.html`. Resume content is in `resume.html`; the downloadable file is `assets/Abdullah-Malik-Resume.pdf`. The currently configured links and email were supplied by the user. LinkedIn was not independently fetched or verified.
 
 ### Portrait
 
@@ -54,10 +54,14 @@ Edit `profile.js` for the contact links, downloadable bio details, and portrait 
 
 ### Credentials and projects
 
-The user provided Virtual University, Lahore, but no degree name, employment history, or earned certificates. Those details have not been invented. Certification content is identified as a learning focus until actual credentials are supplied. The illustrated projects are explicitly labeled concepts, not completed client work or awards. Ecosystem tools are described by their role in agent development rather than claimed certifications or proficiency ratings. Local logo provenance is documented in `assets/logos/NOTICE.md`.
+The user provided Virtual University, Lahore, but no degree name, employment history, or earned certificates. Those details have not been invented. The Learning & Development section describes areas of technical exploration without claiming earned certificates. The illustrated projects are explicitly labeled concepts, not completed client work or awards. Ecosystem tools are described by their role in agent development rather than claimed certifications or proficiency ratings. Local logo provenance is documented in `assets/logos/NOTICE.md`.
 
 The live reference domain was blocked by the environment network policy. The supplied screenshots guided the visual design; original animation timing could not be inspected. The site implements its own card, cursor, marquee, title, and reveal animations.
 
 ## Environment
 
 Use the existing `/workspace/portfolio` checkout. Each cloud task is isolated; do not create a worktree unless requested. Dependencies and build files can persist in a snapshot, but the development server must be started again in a new task.
+
+## Updating the resume
+
+Edit `resume.html`, open it through the development server, and use Print / Save as PDF with A4 paper and the document's CSS margins. Save the result as `assets/Abdullah-Malik-Resume.pdf`, then run `npm run build`. The PDF is a committed static asset; Vercel does not need a browser or PDF-generation dependency. Resume links work without JavaScript.

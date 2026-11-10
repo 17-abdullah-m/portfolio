@@ -4,7 +4,6 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-const announce = (message) => { $('#announcement').textContent = message; };
 
 // Saved theme is optional: all interactions continue to work if storage is blocked.
 const themeButton = $('.theme-toggle');
@@ -67,13 +66,13 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
 reducedMotion.addEventListener('change', event => { if(event.matches) document.documentElement.classList.remove('motion-ready'); });
 
 // Fade between real focus areas; never advertise unprovided credentials.
-const roles = ['AI Agent Developer', 'Python Agent Developer', 'Automation Engineer', 'Vibe Coder'];
+const roles = ['AI Agent Developer', 'Python Agent Developer', 'Automation Engineer', 'AI-Assisted Developer'];
 let roleIndex = 0;
 setInterval(() => {
   if(reducedMotion.matches || document.hidden) return;
   const element = $('#rotating-role');
   element.classList.add('role-exit');
-  setTimeout(() => { roleIndex = (roleIndex + 1) % roles.length; element.textContent = roles[roleIndex]; $('#role-article').textContent = (roleIndex === 1 || roleIndex === 3) ? 'a' : 'an'; element.classList.remove('role-exit'); }, 240);
+  setTimeout(() => { roleIndex = (roleIndex + 1) % roles.length; element.textContent = roles[roleIndex]; $('#role-article').textContent = /^[aeiou]/i.test(roles[roleIndex]) ? 'an' : 'a'; element.classList.remove('role-exit'); }, 240);
 }, 3400);
 
 const card = $('#profile-card');
@@ -142,9 +141,9 @@ $$('[data-filter]').forEach(button => button.addEventListener('click', () => {
 }));
 
 const concepts = {
-  agents: {title:'A task-aware Python agent.',description:'An illustrative Python AI-agent architecture connecting a language model to useful tools and business APIs.',steps:['Receive a request and check the information needed for the task.','Use a language model to choose an appropriate connected tool.','Execute permitted tool actions through a Python API layer.','Review the result, handle exceptions, and escalate decisions that need a person.']},
-  workflow: { title:'One connected workflow.',description:'An illustrative n8n workflow that connects an incoming event to a practical business action.',steps:['Capture an incoming form, message, or event.','Check and organize the information.','Route it to the right tool or human reviewer.','Record the outcome and handle exceptions.'] },
-  tools: {title:'From idea to useful tool.',description:'An illustrative approach to building a small business interface with AI-assisted development.',steps:['Choose one clearly defined task.','Build an interface around the person doing the task.','Connect the workflow behind the interface.','Test real scenarios and refine the result.']},
+  agents: {title:'Task-oriented Python agents.',description:'An illustrative Python AI-agent architecture connecting a language model to useful tools and business APIs.',steps:['Receive a request and check the information needed for the task.','Use a language model to choose an appropriate connected tool.','Execute permitted tool actions through a Python API layer.','Review the result, handle exceptions, and escalate decisions that need a person.']},
+  workflow: { title:'Workflow architecture.',description:'An illustrative n8n workflow that connects an incoming event to a practical business action.',steps:['Capture an incoming form, message, or event.','Check and organize the information.','Route it to the right tool or human reviewer.','Record the outcome and handle exceptions.'] },
+  tools: {title:'Purpose-built interfaces.',description:'An illustrative approach to building a small business interface with AI-assisted development.',steps:['Choose one clearly defined task.','Build an interface around the person doing the task.','Connect the workflow behind the interface.','Test real scenarios and refine the result.']},
   handoff: {title:'A better handoff.',description:'A concept for organizing incoming requests without losing the human review step.',steps:['Capture a request and its context.','Organize the details needed for the next action.','Prepare a clear summary for a reviewer.','Continue the workflow after human approval.']}
 };
 const projectDialog = $('#project-dialog');
@@ -162,14 +161,6 @@ function downloadText(filename, text) {
   const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
   const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-$$('.bio-download').forEach(button=>button.addEventListener('click',()=>{
-  const lines=[profile.name || 'Abdullah Malik',profile.headline || '', '', 'Building practical automations for businesses.','Focus: Python AI agents, workflow engineering, n8n automation, and vibe coding.'];
-  if(profile.education)lines.push(`Education: ${profile.education}`);
-  if(profile.email)lines.push(`Email: ${profile.email}`);
-  if(profile.linkedin)lines.push(`LinkedIn: ${profile.linkedin}`);
-  lines.push('GitHub: https://github.com/17-abdullah-m');
-  downloadText('Abdullah-Malik-Bio.txt',lines.join('\n'));announce('Your copy of Abdullah’s bio has been downloaded.');
-}));
 if(profile.portrait) { $$('[data-portrait]').forEach(image=>{image.src=profile.portrait;image.alt='Portrait of Abdullah Malik';image.addEventListener('error',()=>{image.src='assets/portrait.svg';image.alt='AM monogram; profile photo unavailable';},{once:true});}); }
 if(profile.linkedin) {
   try {const url=new URL(profile.linkedin);if(url.protocol==='https:' && (url.hostname==='linkedin.com'||url.hostname==='www.linkedin.com')){
@@ -179,7 +170,7 @@ if(profile.linkedin) {
 const validEmail = typeof profile.email === 'string' && /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(profile.email);
 if(validEmail) {
   const a=document.createElement('a');a.href=`mailto:${profile.email}`;a.textContent=profile.email;$('#contact-address').replaceChildren(a);
-  $('#submit-label').textContent='Open email draft';$('#form-note').textContent='Opens your email app. Nothing is sent automatically.';
+  $('#submit-label').textContent='Start a Conversation';$('#form-note').textContent='Opens your email app. Nothing is sent automatically.';
   $$('[data-socials]').forEach(container=>{let a=$('a[aria-label="Contact Abdullah"]',container);if(!a){a=document.createElement('a');a.className='icon-button';a.setAttribute('aria-label','Email Abdullah');a.innerHTML='<svg><use href="#mail"/></svg>';container.append(a);}a.href=`mailto:${profile.email}`;a.setAttribute('aria-label','Email Abdullah');});
 }
 let messageDraft='';
