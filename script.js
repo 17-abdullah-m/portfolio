@@ -67,13 +67,13 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
 reducedMotion.addEventListener('change', event => { if(event.matches) document.documentElement.classList.remove('motion-ready'); });
 
 // Fade between real focus areas; never advertise unprovided credentials.
-const roles = ['AI Automation Developer', 'n8n Workflow Builder', 'Vibe Coder'];
+const roles = ['AI Agent Developer', 'Python Agent Developer', 'Automation Engineer', 'Vibe Coder'];
 let roleIndex = 0;
 setInterval(() => {
   if(reducedMotion.matches || document.hidden) return;
   const element = $('#rotating-role');
   element.classList.add('role-exit');
-  setTimeout(() => { roleIndex = (roleIndex + 1) % roles.length; element.textContent = roles[roleIndex]; $('#role-article').textContent = roleIndex === 2 ? 'a' : 'an'; element.classList.remove('role-exit'); }, 240);
+  setTimeout(() => { roleIndex = (roleIndex + 1) % roles.length; element.textContent = roles[roleIndex]; $('#role-article').textContent = (roleIndex === 1 || roleIndex === 3) ? 'a' : 'an'; element.classList.remove('role-exit'); }, 240);
 }, 3400);
 
 const card = $('#profile-card');
@@ -142,6 +142,7 @@ $$('[data-filter]').forEach(button => button.addEventListener('click', () => {
 }));
 
 const concepts = {
+  agents: {title:'A task-aware Python agent.',description:'An illustrative Python AI-agent architecture connecting a language model to useful tools and business APIs.',steps:['Receive a request and check the information needed for the task.','Use a language model to choose an appropriate connected tool.','Execute permitted tool actions through a Python API layer.','Review the result, handle exceptions, and escalate decisions that need a person.']},
   workflow: { title:'One connected workflow.',description:'An illustrative n8n workflow that connects an incoming event to a practical business action.',steps:['Capture an incoming form, message, or event.','Check and organize the information.','Route it to the right tool or human reviewer.','Record the outcome and handle exceptions.'] },
   tools: {title:'From idea to useful tool.',description:'An illustrative approach to building a small business interface with AI-assisted development.',steps:['Choose one clearly defined task.','Build an interface around the person doing the task.','Connect the workflow behind the interface.','Test real scenarios and refine the result.']},
   handoff: {title:'A better handoff.',description:'A concept for organizing incoming requests without losing the human review step.',steps:['Capture a request and its context.','Organize the details needed for the next action.','Prepare a clear summary for a reviewer.','Continue the workflow after human approval.']}
@@ -162,7 +163,7 @@ function downloadText(filename, text) {
   const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 $$('.bio-download').forEach(button=>button.addEventListener('click',()=>{
-  const lines=[profile.name || 'Abdullah Malik',profile.headline || '', '', 'Building practical automations for businesses.','Focus: n8n workflows, AI automation, and vibe coding.'];
+  const lines=[profile.name || 'Abdullah Malik',profile.headline || '', '', 'Building practical automations for businesses.','Focus: Python AI agents, workflow engineering, n8n automation, and vibe coding.'];
   if(profile.education)lines.push(`Education: ${profile.education}`);
   if(profile.email)lines.push(`Email: ${profile.email}`);
   if(profile.linkedin)lines.push(`LinkedIn: ${profile.linkedin}`);
