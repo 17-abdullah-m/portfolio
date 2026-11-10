@@ -6,5 +6,6 @@ window.portfolioProfile = {
   linkedin: 'https://www.linkedin.com/in/abdullah-malik-eng/',
   github: 'https://github.com/17-abdullah-m',
   education: 'Virtual University, Lahore',
+  location: 'Lahore, Pakistan',
   portrait: 'assets/portrait.png',
 };

@@ -167,6 +167,7 @@ if(profile.linkedin) {
     $$('[data-socials]').forEach(container=>{const a=document.createElement('a');a.className='icon-button';a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label','Abdullah’s LinkedIn');a.innerHTML='<span class="linkedin-mark" aria-hidden="true">in</span>';container.prepend(a);});
   }} catch {}
 }
+if(profile.location) $('#contact-location').textContent=profile.location;
 const validEmail = typeof profile.email === 'string' && /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(profile.email);
 if(validEmail) {
   const a=document.createElement('a');a.href=`mailto:${profile.email}`;a.textContent=profile.email;$('#contact-address').replaceChildren(a);
