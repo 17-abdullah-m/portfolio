@@ -140,7 +140,10 @@ $$('[data-filter]').forEach(button => button.addEventListener('click', () => {
   $$('[data-category]').forEach(group => {group.hidden=category!=='all' && group.dataset.category!==category;group.classList.remove('entering');if(!group.hidden){void group.offsetWidth;group.classList.add('entering');}});
 }));
 
-const concepts = {
+const projectDetails = {
+  clientflow: {kind:'INTERFACE STUDY',title:'ClientFlow',description:'A client-workflow interface study exploring a clearer journey from the initial conversation to the next action.',steps:['Create a clear starting point for the client journey.','Present the process as connected stages rather than disconnected tasks.','Use a consistent visual hierarchy to make the next step easier to understand.'],note:'Illustrative interface study: connect, coordinate, deliver. No specific technology stack or live integration is claimed.'},
+  skydust: {kind:'SELECTED PROJECT',title:'Skydust Connection',description:'A fragrance storefront designed around product discovery, clear collections, and a responsive shopping experience.',steps:['Organize scent products into clear, browsable collections.','Present diffusers, aroma oils, and home fragrances with consistent product imagery.','Support a responsive interface across desktop and mobile.','Keep the visual identity consistent throughout the product experience.'],note:'Based on the public project README and source. Portfolio preview uses the project’s original diffuser image within a recreated storefront frame.'},
+  dispatchpro: {kind:'SELECTED PROJECT',title:'DispatchPro',description:'A browser-based truck dispatching dashboard that brings load records, carriers, rates, and dispatch earnings into one workspace.',steps:['Create and manage loads with routes, appointments, brokers, mileage, and notes.','Keep carrier and equipment information alongside load assignments.','Compare broker, target, and negotiated rates with revenue-per-mile and dispatch-fee calculations.','Track the load lifecycle and export filtered records to CSV.'],note:'Public portfolio demo with fictional sample records and browser-local storage. The dashboard preview is an interface illustration.'},
   agents: {title:'Task-oriented Python agents.',description:'An illustrative Python AI-agent architecture connecting a language model to useful tools and business APIs.',steps:['Receive a request and check the information needed for the task.','Use a language model to choose an appropriate connected tool.','Execute permitted tool actions through a Python API layer.','Review the result, handle exceptions, and escalate decisions that need a person.']},
   workflow: { title:'Workflow architecture.',description:'An illustrative n8n workflow that connects an incoming event to a practical business action.',steps:['Capture an incoming form, message, or event.','Check and organize the information.','Route it to the right tool or human reviewer.','Record the outcome and handle exceptions.'] },
   tools: {title:'Purpose-built interfaces.',description:'An illustrative approach to building a small business interface with AI-assisted development.',steps:['Choose one clearly defined task.','Build an interface around the person doing the task.','Connect the workflow behind the interface.','Test real scenarios and refine the result.']},
@@ -148,7 +151,9 @@ const concepts = {
 };
 const projectDialog = $('#project-dialog');
 $$('.project-open').forEach(button => button.addEventListener('click', () => {
-  const concept=concepts[button.dataset.project];
+  const concept=projectDetails[button.dataset.project];
+  $('#dialog-kind').textContent=concept.kind || 'CONCEPT STUDY';
+  $('#dialog-note').textContent=concept.note || 'Illustrative concept study exploring system design and implementation options.';
   $('#dialog-title').textContent=concept.title;$('#dialog-description').textContent=concept.description;
   $('#dialog-steps').replaceChildren(...concept.steps.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
   projectDialog.showModal();

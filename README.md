@@ -54,7 +54,7 @@ Edit `profile.js` for the contact links, professional headline, and portrait sou
 
 ### Credentials and projects
 
-The user provided Virtual University, Lahore, but no degree name, employment history, or earned certificates. Those details have not been invented. The Learning & Development section describes areas of technical exploration without claiming earned certificates. The illustrated projects are explicitly labeled concepts, not completed client work or awards. Ecosystem tools are described by their role in agent development rather than claimed certifications or proficiency ratings. Local logo provenance is documented in `assets/logos/NOTICE.md`.
+The user provided Virtual University, Lahore, but no degree name, employment history, or earned certificates. Those details have not been invented. The Learning & Development section describes areas of technical exploration without claiming earned certificates. The selected project cards include Skydust Connection and DispatchPro, based on the user’s project source and documentation. ClientFlow is presented as an interface study until its specific project details are supplied. Recreated interface previews are labeled as illustrations or studies. Additional architecture concepts remain explicitly identified as concept studies. Ecosystem tools are described by their role in agent development rather than claimed certifications or proficiency ratings. Local logo provenance is documented in `assets/logos/NOTICE.md`.
 
 The live reference domain was blocked by the environment network policy. The supplied screenshots guided the visual design; original animation timing could not be inspected. The site implements its own card, cursor, marquee, title, and reveal animations.
 
@@ -65,3 +65,9 @@ Use the existing `/workspace/portfolio` checkout. Each cloud task is isolated; d
 ## Updating the resume
 
 Edit `resume.html`, open it through the development server, and use Print / Save as PDF with A4 paper and the document's CSS margins. Save the result as `assets/Abdullah-Malik-Resume.pdf`, then run `npm run build`. The PDF is a committed static asset; Vercel does not need a browser or PDF-generation dependency. Resume links work without JavaScript.
+
+## Selected project sources
+
+- **Skydust Connection:** https://github.com/17-abdullah-m/skydust-connection — the README, `app/layout.tsx`, product catalog, and package manifest establish the fragrance storefront and stack. Its original diffuser hero image is reused in the portfolio preview.
+- **DispatchPro:** the project overview in this repository's history at `cf6d2cb22c2c2a8be116c8b004158b3ce8aaf5a1` describes the browser-based truck dispatch dashboard. Its portfolio preview is an illustration with sample records. No unprovided live URL is advertised.
+- **ClientFlow:** only the project name has been supplied. The card is a clearly labeled client-workflow interface study, without specific integrations, technology claims, or a fabricated demo link. Replace this preliminary overview when the project source or feature details are provided.
